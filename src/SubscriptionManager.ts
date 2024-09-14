@@ -10,9 +10,11 @@ export class Subscription {
   setChannels(channels: string[]) {
     this.#channels = channels;
   }
-  async handleWebsocketMessage(message: any) {}
   get channels() {
     return [...this.#channels];
+  }
+  async handleWebsocketMessage(message: any) {
+    // at this point, we don't expect any messages from the client
   }
 }
 

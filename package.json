@@ -9,7 +9,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "nodemon src/index.ts"
+    "dev": "PORT=8080 SYSTEM_PUBLIC_KEY=test SYSTEM_PRIVATE_KEY=test nodemon src/index.ts"
   },
   "author": "Jeremy Magland",
   "license": "Apache-2.0",

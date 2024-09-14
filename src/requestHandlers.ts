@@ -16,13 +16,19 @@ import {
     SubscribeTokenObject,
 } from "./types";
 
-const SYSTEM_PUBLIC_KEY = process.env.SYSTEM_PUBLIC_KEY;
+let SYSTEM_PUBLIC_KEY = process.env.SYSTEM_PUBLIC_KEY;
 if (!SYSTEM_PUBLIC_KEY) {
   throw new Error("Missing SYSTEM_PUBLIC_KEY");
 }
-const SYSTEM_PRIVATE_KEY = process.env.SYSTEM_PRIVATE_KEY;
+let SYSTEM_PRIVATE_KEY = process.env.SYSTEM_PRIVATE_KEY;
 if (!SYSTEM_PRIVATE_KEY) {
   throw new Error("Missing SYSTEM_PRIVATE_KEY");
+}
+if (SYSTEM_PUBLIC_KEY === 'test') {
+  SYSTEM_PUBLIC_KEY = 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqrzGJDnEnpf0Za7CMR7YNY9RbOWAvSeEhjLGpV64IRGWeGWBZp4XAwwUe5tzJxmjxIDPRf/ghR4BRn6xjTrjMemGu7jmrI/G2C/8vawZjkrBc/xR+KnzGGRhxBrcY40xPfHYVz5f0Uz25b+s643SIaWTTqZaZTEu8rEuHnqI5YLKvHyeS/KS40NeEUDDmgdPKfsTidd312vVkCi0R9QvZZi7FdfC/NGUxJDhj5LnCfbtcDMZrNSFn5j1hS4ive94qUa+p/RlaL/mhY2G0IkzbigwfWuOeiG7664owjQGOn4fzxnr9Q9eJzhGtLP4mHh0vAR9xnkcDZFx1qOjQIWr/QIDAQAB';
+}
+if (SYSTEM_PRIVATE_KEY === 'test') {
+  SYSTEM_PRIVATE_KEY = 'MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCqvMYkOcSel/RlrsIxHtg1j1Fs5YC9J4SGMsalXrghEZZ4ZYFmnhcDDBR7m3MnGaPEgM9F/+CFHgFGfrGNOuMx6Ya7uOasj8bYL/y9rBmOSsFz/FH4qfMYZGHEGtxjjTE98dhXPl/RTPblv6zrjdIhpZNOplplMS7ysS4eeojlgsq8fJ5L8pLjQ14RQMOaB08p+xOJ13fXa9WQKLRH1C9lmLsV18L80ZTEkOGPkucJ9u1wMxms1IWfmPWFLiK973ipRr6n9GVov+aFjYbQiTNuKDB9a456IbvrrijCNAY6fh/PGev1D14nOEa0s/iYeHS8BH3GeRwNkXHWo6NAhav9AgMBAAECggEAEQT18rjSyYUChuZM6OzsXCkX/UptXa2kRLpSrzu0urslltp2HolmEtbamIMOOgNmHe7senZUu6rvhpxCIlQQlLJKIh6pg+G7I7ljhhwIhModOZdugQ1JNGZr5nVPqxlxI1MfH9HnEZaMn/9OLew6WkHxNVcDeMXWf7kQt1dl8QwW0FWErVPwdY/+wlTGIcuzOFgjZI6E4opQd05ZmAV1urvBWIOJzLajf5TY1geY83Fm7bhtMVMs3AknAb5Q0rhMxX0zlZsUYcaM8zRjbP+BejTJXdq8wm5D3xbO0HTisTN3ljGGMYRn/yDRbqSF2CyK+LHpbY3+F+v6Ps793QmJswKBgQDrKXZ4fqcwyl51EqdlkPf5Dedf3wAm0lMMTy8Xbn/odMN8GsY4VFE9WItNsr0PsyLEMBnauQlOHxRPGYsibd+6nGODYhsARXtkBkQctkd3TQS+8xI8xGGRxmoyH0kNc3JmszA/Kum0NWwU4WsxsJtt0BZDDkK/ekPYPx1KuMqAWwKBgQC53d7gKq2jmQKgjTy+mgfy9Ykv7weDCGglO7fa1zy1pgoPXWsmNoDRBcvdidWCQ2k2cekaGbf4C0O/ritp+L+vMZz13iRLWiGwqYRJjlLn+JU9H2reztyfNVniuB3WN8/wZtOrZ0Z2aaabEAuEAaBi8TMA8llRHd1Ke32RWzS0hwKBgQDmMEz2P8u6d60kXiEby17gHJsKfkgwuBpw5yXKgvCTg5BC8BZt1yM6sGyTns1wC8KRViBIuG2CWevQTcmi5vhkO2cxmRujFWBmFbggftDP18U4gMiuUPDM9/LFo1gn4YTvQKGOg5wGOXDVs53xItXSFSlldBUkRzMX/xfWJ7KZFwKBgDCJSdxMCNAB8veuKkCzxIOjrtF/n/yNw3SFpbtWHZpp45KjmImADh+HXfdaOREtPVpkYLTaJnp1ppl1iAzCUnwTfqOOAPhUbxvNCKiUq/27om01uRi5+E7zBaf44IHCTWC/2WKXM4VUjZdMl1U/f3yW8/S5VK2kGNeMa/v7T0YdAoGACnvU7PEhz2OnLwiwFW5WZ5uJEfRlZaJ0C8rATT49u5FIi8zy7Xsa8VDIsZD9qWaD8ehlkFfYtXm4Uzdm/zdhc5mSpcHUgdaanA/O3kAwdeXBjDxd+W0YsfxEmtq/nlEKSIhmODLGEQPsHmbfjUp22/FNcCW34dI43ldaaIK6YOk=';
 }
 
 const currentPublishDifficulty = 13;
@@ -113,6 +119,7 @@ export const publishHandler = async (
   );
   const m: PubsubMessage = {
     type: "message",
+    channel,
     senderPublicKey,
     timestamp: timestamp0,
     messageJson,

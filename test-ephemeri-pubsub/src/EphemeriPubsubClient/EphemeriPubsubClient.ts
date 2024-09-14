@@ -14,6 +14,12 @@ import {
   isSubscribeTokenObject,
 } from "./types";
 
+// const baseUrl = "http://localhost:8080";
+// const websocketUrl = "ws://localhost:8080";
+
+const baseUrl = "https://ephemeri-pubsub-1-a3c7d458bccb.herokuapp.com"
+const websocketUrl = "wss://ephemeri-pubsub-1-a3c7d458bccb.herokuapp.com"
+
 export class EphemeriPubsubClient {
   #onMessageHandlers: ((m: PubsubMessage) => void)[] = [];
   #websocketConnection: WebSocket | undefined = undefined;
@@ -298,9 +304,6 @@ const solveChallenge = async (
     }
   }
 };
-
-const baseUrl = "http://localhost:8080";
-const websocketUrl = "ws://localhost:8080";
 
 const postApiRequest = async (endpoint: string, req: any) => {
   const response = await fetch(`${baseUrl}/${endpoint}`, {

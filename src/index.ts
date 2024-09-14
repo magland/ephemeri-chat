@@ -20,7 +20,11 @@ const app = express();
 
 app.use(
     cors({
-        origin: ["http://localhost:5173", "https://ephemeri-pubsub-1-a3c7d458bccb.herokuapp.com"],
+        origin: [
+            "http://localhost:5173",
+            "http://localhost:3000",
+            "https://neurosift.app"
+        ],
     })
 );
 

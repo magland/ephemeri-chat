@@ -4,7 +4,7 @@
 
 This server is designed to run on Heroku.
 
-**Step 1: Create a new Heroku project**
+**Step 1: Create a new Heroku app**
 
 Sign up for a [Heroku](https://heroku.com) account and Create a new app. Name it something like `ephemeri-chat-1`.
 

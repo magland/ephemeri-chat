@@ -1,7 +1,7 @@
 {
-  "name": "ephemeri-pubsub",
+  "name": "ephemeri-chat",
   "version": "0.1.0",
-  "description": "ephemeri-pubsub",
+  "description": "ephemeri-chat",
   "engines": {
     "node": "20.x"
   },

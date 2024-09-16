@@ -1,4 +1,4 @@
-import { PubsubMessage } from "./types";
+import { ChatMessage } from "./types";
 
 export class Subscription {
   #channels: string[] = [];
@@ -30,10 +30,10 @@ class Channel {
     }
     delete this.#subscriptions[subscription.subscriptionId];
   }
-  publishMessage(message: PubsubMessage) {
+  publishMessage(message: ChatMessage) {
     for (const subscriptionId in this.#subscriptions) {
       this.#subscriptions[subscriptionId].sendWebsocketMessageToClient({
-        type: "pubsubMessage",
+        type: "chatMessage",
         channel: this.channelName,
         message,
       });
@@ -66,7 +66,7 @@ export class SubscriptionManager {
       this.#channels[channel].removeSubscription(subscription);
     }
   }
-  publishMessage(channel: string, message: PubsubMessage) {
+  publishMessage(channel: string, message: ChatMessage) {
     if (!this.#channels[channel]) {
       return;
     }

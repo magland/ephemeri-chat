@@ -1,12 +1,12 @@
 import { useEffect, useReducer, useState } from "react";
-import { EphemeriPubsubClient, generateKeyPair } from "./EphemeriPubsubClient/EphemeriPubsubClient";
-import { PubsubMessage } from "./EphemeriPubsubClient/types";
+import { EphemeriChatClient, generateKeyPair } from "./EphemeriChatClient/EphemeriChatClient";
+import { ChatMessage } from "./EphemeriChatClient/types";
 
-type MessagesState = PubsubMessage[];
+type MessagesState = ChatMessage[];
 
 type MessagesAction = {
   type: "add";
-  message: PubsubMessage;
+  message: ChatMessage;
 };
 
 const messagesReducer = (
@@ -32,12 +32,12 @@ const messagesReducer = (
 
 function App() {
   const [messages, messagesDispatch] = useReducer(messagesReducer, []);
-  const [client, setClient] = useState<EphemeriPubsubClient | null>(null);
+  const [client, setClient] = useState<EphemeriChatClient | null>(null);
   useEffect(() => {
     (async () => {
       const { publicKey, privateKey } = await generateKeyPair();
-      const client = new EphemeriPubsubClient(publicKey, privateKey, {verbose: true});
-      client.onMessage((e: PubsubMessage) => {
+      const client = new EphemeriChatClient(publicKey, privateKey, {verbose: true});
+      client.onMessage((e: ChatMessage) => {
         if (e.type === "message") {
           messagesDispatch({ type: "add", message: e });
         }

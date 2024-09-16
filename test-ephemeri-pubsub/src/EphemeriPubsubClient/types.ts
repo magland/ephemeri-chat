@@ -191,8 +191,8 @@ export const isSubscribeTokenObject = (x: any): x is SubscribeTokenObject => {
   );
 };
 
-// pubsub message
-export type PubsubMessage = {
+// chat message
+export type ChatMessage = {
   type: "message";
   channel: string;
   senderPublicKey: string;
@@ -204,7 +204,7 @@ export type PubsubMessage = {
   systemPublicKey: string;
 };
 
-export const isPubsubMessage = (x: any): x is PubsubMessage => {
+export const isChatMessage = (x: any): x is ChatMessage => {
   return (
     x &&
     typeof x === "object" &&

@@ -10,7 +10,7 @@ import {
     PublishRequest,
     PublishResponse,
     PublishTokenObject,
-    PubsubMessage,
+    ChatMessage,
     SubscribeRequest,
     SubscribeResponse,
     SubscribeTokenObject,
@@ -117,7 +117,7 @@ export const publishHandler = async (
     systemSignaturePayload,
     SYSTEM_PRIVATE_KEY
   );
-  const m: PubsubMessage = {
+  const m: ChatMessage = {
     type: "message",
     channel,
     senderPublicKey,
